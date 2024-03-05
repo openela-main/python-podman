@@ -1,6 +1,6 @@
 Name: python-podman
 Version: 4.6.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: RESTful API for Podman
 License: ASL 2.0
 URL: https://github.com/containers/podman-py
@@ -45,6 +45,10 @@ Summary: %{summary}
 %{python3_sitelib}/podman-*/*
 
 %changelog
+* Mon Dec 11 2023 Lokesh Mandvekar <lsm5@redhat.com> - 4.6.0-2
+- Rebuild with updated python-urllib3 for CVE-2203-43804
+- Related: Jira:RHEL-11987
+
 * Thu Jul 27 2023 Jindrich Novy <jnovy@redhat.com> - 4.6.0-1
 - update to https://github.com/containers/podman-py/releases/tag/v4.6.0
 - Related: #2176055
