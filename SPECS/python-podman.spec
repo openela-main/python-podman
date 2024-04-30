@@ -1,6 +1,6 @@
 Name: python-podman
 Epoch: 3
-Version: 4.6.0
+Version: 4.9.0
 Release: 1%{?dist}
 Summary: RESTful API for Podman
 License: ASL 2.0
@@ -44,6 +44,26 @@ export PBR_VERSION="0.0.0"
 %doc README.md
 
 %changelog
+* Tue Jan 23 2024 Jindrich Novy <jnovy@redhat.com> - 3:4.9.0-1
+- update to https://github.com/containers/podman-py/releases/tag/v4.9.0
+- Related: RHEL-2112
+
+* Fri Jan 05 2024 Jindrich Novy <jnovy@redhat.com> - 3:4.8.2-1
+- update to https://github.com/containers/podman-py/releases/tag/v4.8.2
+- Related: RHEL-2112
+
+* Tue Jan 02 2024 Jindrich Novy <jnovy@redhat.com> - 3:4.8.1-1
+- update to https://github.com/containers/podman-py/releases/tag/v4.8.1
+- Related: RHEL-2112
+
+* Wed Dec 06 2023 Lokesh Mandvekar <lsm5@redhat.com> - 3:4.8.0.post1-1
+- update to https://github.com/containers/podman-py/releases/tag/v4.8.0.post1
+- Related: Jira:RHEL-2112
+
+* Fri Sep 29 2023 Jindrich Novy <jnovy@redhat.com> - 3:4.7.0-1
+- update to https://github.com/containers/podman-py/releases/tag/v4.7.0
+- Related: Jira:RHEL-2112
+
 * Thu Jul 27 2023 Jindrich Novy <jnovy@redhat.com> - 3:4.6.0-1
 - update to https://github.com/containers/podman-py/releases/tag/v4.6.0
 - Related: #2176063
