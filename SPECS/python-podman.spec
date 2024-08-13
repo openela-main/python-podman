@@ -1,6 +1,6 @@
 Name: python-podman
 Version: 4.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: RESTful API for Podman
 License: ASL 2.0
 URL: https://github.com/containers/podman-py
@@ -22,6 +22,7 @@ BuildRequires: python%{python3_pkgversion}-sphinx
 Requires: python%{python3_pkgversion}-pytoml
 Requires: python%{python3_pkgversion}-pyxdg
 Requires: python%{python3_pkgversion}-requests
+Requires: python%{python3_pkgversion}-urllib3
 Provides: podman-py = %{version}-%{release}
 Summary: %{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-podman}
@@ -45,6 +46,10 @@ Summary: %{summary}
 %{python3_sitelib}/podman-*/*
 
 %changelog
+* Tue Jul 09 2024 Jindrich Novy <jnovy@redhat.com> - 4.9.0-2
+- depend directly on urllib3
+- Resolves: RHEL-43567
+
 * Tue Jan 23 2024 Jindrich Novy <jnovy@redhat.com> - 4.9.0-1
 - update to https://github.com/containers/podman-py/releases/tag/v4.9.0
 - Related: Jira:RHEL-2110
