@@ -1,10 +1,19 @@
+%global import_path github.com/containers/podman-py
+%global branch release-4.9
+%global commit0 07e1b45ca48db63ae4a3106ee630d120bdd89866
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Name: python-podman
 Version: 4.9.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: RESTful API for Podman
 License: ASL 2.0
 URL: https://github.com/containers/podman-py
-Source0: https://github.com/containers/podman-py/archive/refs/tags/v%{version}.tar.gz
+%if 0%{?branch:1}
+Source0: https://%{import_path}/tarball/%{commit0}/%{branch}-%{shortcommit0}.tar.gz
+%else
+Source0: https://%{import_path}/archive/%{commit0}/%{name}-%{version}-%{shortcommit0}.tar.gz
+%endif
 BuildArch: noarch
 
 %description
@@ -31,7 +40,11 @@ Summary: %{summary}
 %{name} is a library of bindings to use the RESTful API for Podman.
 
 %prep
-%autosetup -Sgit_am -n podman-py-%{version}
+%if 0%{?branch:1}
+%autosetup -Sgit -n containers-podman-py-%{shortcommit0}
+%else
+%autosetup -Sgit -n podman-py-%{commit0}
+%endif
 
 %build
 %py3_build
@@ -46,6 +59,10 @@ Summary: %{summary}
 %{python3_sitelib}/podman-*/*
 
 %changelog
+* Tue Oct 29 2024 Jindrich Novy <jnovy@redhat.com> - 4.9.0-3
+- sync with release-4.9 branch
+- Resolves: RHEL-31069
+
 * Tue Jul 09 2024 Jindrich Novy <jnovy@redhat.com> - 4.9.0-2
 - depend directly on urllib3
 - Resolves: RHEL-43567
