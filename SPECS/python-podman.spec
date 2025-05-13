@@ -1,6 +1,6 @@
 Name: python-podman
 Epoch: 3
-Version: 5.2.0
+Version: 5.3.0
 Release: 1%{?dist}
 Summary: RESTful API for Podman
 License: ASL 2.0
@@ -44,6 +44,10 @@ export PBR_VERSION="0.0.0"
 %doc README.md
 
 %changelog
+* Wed Nov 27 2024 Jindrich Novy <jnovy@redhat.com> - 3:5.3.0-1
+- update to https://github.com/containers/podman-py/releases/tag/v5.3.0
+- Resolves: RHEL-69140
+
 * Mon Aug 05 2024 Jindrich Novy <jnovy@redhat.com> - 3:5.2.0-1
 - update to https://github.com/containers/podman-py/releases/tag/v5.2.0
 - Related: RHEL-27608
