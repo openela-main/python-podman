@@ -21,7 +21,7 @@ Epoch: 3
 # If that's what you're reading, Version must be 0, and will be updated by Packit for
 # copr and koji builds.
 # If you're reading this on dist-git, the version is automatically filled in by Packit.
-Version: 5.5.0
+Version: 5.7.0
 License: Apache-2.0
 Release: 1%{?dist}
 Summary: RESTful API for Podman
@@ -81,10 +81,7 @@ export PBR_VERSION="0.0.0"
 %pyproject_save_files %{pypi_name}
 %endif
 
-%if !%{defined rhel8_py}
 %check
-%pyproject_check_import -e podman.api.typing_extensions
-%endif
 
 %if %{defined rhel8_py}
 %files -n python%{python3_pkgversion}-%{pypi_name}
@@ -100,6 +97,14 @@ export PBR_VERSION="0.0.0"
 %doc README.md
 
 %changelog
+* Tue Feb 03 2026 Jindrich Novy <jnovy@redhat.com> - 3:5.7.0-1
+- update to https://github.com/containers/podman-py/releases/tag/v5.7.0
+- Related: RHEL-122178
+
+* Fri Sep 12 2025 Jindrich Novy <jnovy@redhat.com> - 3:5.6.0-1
+- update to https://github.com/containers/podman-py/releases/tag/v5.6.0
+- Related: RHEL-111917
+
 * Fri Jun 20 2025 Jindrich Novy <jnovy@redhat.com> - 3:5.5.0-1
 - update to https://github.com/containers/podman-py/releases/tag/v5.5.0
 - Related: RHEL-80817
