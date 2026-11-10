@@ -21,8 +21,8 @@ Epoch: 3
 # If that's what you're reading, Version must be 0, and will be updated by Packit for
 # copr and koji builds.
 # If you're reading this on dist-git, the version is automatically filled in by Packit.
-Version: 5.7.0
-Release: 1%{?dist}
+Version: 5.8.0
+Release: 2%{?dist}
 License: Apache-2.0
 Summary: RESTful API for Podman
 URL: https://github.com/containers/%{pypi_name}-py
@@ -58,6 +58,18 @@ Summary: %{summary}
 
 %prep
 %autosetup -Sgit -n %{pypi_name}-py-%{version}
+
+# Upstream commit 54143c4c6546 removed podman/domain/__init__.py converting
+# to PEP 420 implicit namespace packages (requires setuptools 62+).
+# RHEL 9 has setuptools 53 which needs __init__.py for find_packages().
+touch podman/domain/__init__.py
+
+# Upstream switched from static version to dynamic version resolution
+# via [tool.setuptools.dynamic] which requires setuptools 62+.
+# Restore static version for RHEL 9 setuptools 53 compatibility.
+sed -i 's/^dynamic = \["version"\]/# dynamic = ["version"]\nversion = "%{version}"/' pyproject.toml
+sed -i 's/^\[tool\.setuptools\.dynamic\]/# [tool.setuptools.dynamic]/' pyproject.toml
+sed -i 's/^version = {attr = "podman\.version\.__version__"}/# version = {attr = "podman.version.__version__"}/' pyproject.toml
 
 %if !%{defined rhel8_py}
 %generate_buildrequires
@@ -97,6 +109,15 @@ export PBR_VERSION="0.0.0"
 %doc README.md
 
 %changelog
+* Thu Aug 20 2026 Jindrich Novy <jnovy@redhat.com> - 3:5.8.0-2
+- fix missing podman.domain module and wrong version metadata on RHEL 9 -
+  upstream commit 54143c4c6546 requires setuptools 62+ but RHEL 9 has 53 -
+  Resolves: RHEL-245037
+
+* Fri Apr 24 2026 Jindrich Novy <jnovy@redhat.com> - 3:5.8.0-1
+- update to https://github.com/containers/podman-py/releases/tag/v5.8.0
+- Resolves: RHEL-140716
+
 * Wed Feb 04 2026 Jindrich Novy <jnovy@redhat.com> - 3:5.7.0-1
 - update to https://github.com/containers/podman-py/releases/tag/v5.7.0
 - Related: RHEL-111919
